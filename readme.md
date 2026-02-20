@@ -2,7 +2,7 @@
 
 This document explains the **Transformer** architecture section-by-section, with **English + Chinese** explanations and **PyTorch** code in each component.
 
-> **Full runnable implementation:** All code blocks below are extracted and organized in `Testtorch.py`, which you can run directly.
+> **Full runnable implementation:** All code blocks below are extracted and organized in `model.py`, which you can run directly.
 
 ## The Transformer Architecture
 
@@ -497,7 +497,9 @@ class Decoder(nn.Module):
 We feed the decoder the ground-truth target tokens shifted right:
 
 - Input to decoder: $\text{tgt\_in} = [\langle\text{bos}\rangle, y_1, y_2, \ldots, y_{T-1}]$
+
 - Model predicts: $\hat{y} = [y_1, y_2, \ldots, y_T]$
+
 - Loss: cross-entropy over next-token predictions.
 
 Because the entire target sequence is known during training, we can compute outputs for all positions in one forward pass (with causal masking).
@@ -534,7 +536,7 @@ To make inference fast, real systems use **KV caching** (store previous attentio
 
 ### PyTorch code
 
-*Requires: all components from §1–5. Full runnable code: `Testtorch.py`.*
+*Requires: all components from §1–5. Full runnable code: `model.py`.*
 
 **1) Seq2Seq model:**
 ```python
